@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MailList;
+use App\Models\ReportProperties;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
-class MailListController extends Controller
+class ReportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,10 @@ class MailListController extends Controller
      */
     public function index()
     {
-        $mailList = MailList::all();
+        $report = ReportProperties::all();
 
-        return View::make('mail.list')->with(['mailList' => $mailList]);
+
+        return View::make('report.list')->with(['report' => $report]);
     }
 
     /**
@@ -28,7 +29,7 @@ class MailListController extends Controller
     public function create()
     {
         //
-        return View::make('mailList.create');
+        return View::make('report.create');
     }
 
     /**
@@ -39,14 +40,12 @@ class MailListController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $validatedData = $request->validate([
-            'subject' => 'required',
-            'body' => 'required',
-            'sender' => 'required',
-            'status' => 'required',
+            'column_name' => 'required'
         ]);
-        $show = MailList::create($validatedData);
+        $show = ReportProperties::create($validatedData);
+
+        return redirect('/report/list');
     }
 
     /**
@@ -58,12 +57,13 @@ class MailListController extends Controller
     public function show($id)
     {
         //
-        $mailList = MailList::find($id);
+        $report = ReportProperties::find($id);
 
         // show the view and pass the shark to it
         return View::make('sharks.show')
-            ->with('shark', $mailList);
+            ->with('shark', $report);
     }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -73,6 +73,11 @@ class MailListController extends Controller
     public function edit($id)
     {
         //
+        $report = ReportProperties::find($id);
+
+        // show the edit form and pass the shark
+        return View::make('sharks.edit')
+            ->with('shark', $report);
     }
 
     /**
@@ -84,7 +89,17 @@ class MailListController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'product_id' => 'required',
+            'product_name' => 'required',
+            'unit_price' => 'required',
+            'total_price' => 'required',
+            'quantity' => 'required',
+            'type' => 'required',
+        ]);
+        ReportProperties::whereId($id)->update($validatedData);
+
+        return redirect('/games')->with('success', 'Game Data is successfully updated');
     }
 
     /**
@@ -95,7 +110,9 @@ class MailListController extends Controller
      */
     public function destroy($id)
     {
-        $mailList = MailList::findOrFail($id);
-        $mailList->delete();
+        $report = ReportProperties::findOrFail($id);
+        $report->delete();
+
+        return redirect('/report/list');
     }
 }

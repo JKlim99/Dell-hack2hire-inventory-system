@@ -11,7 +11,7 @@
     <!-- Popper.JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <!-- Bootstrap JS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    
     <!-- jQuery Custom Scroller CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
     
@@ -48,7 +48,8 @@ a, a:hover, a:focus {
     position: fixed;
     min-width: 15%;
     max-width: 15%;
-    height: 100ch;
+    max-height: 100%;
+    min-height: 100%;
     top: 0;
     left: 0;
     background: #7386D5;
@@ -133,9 +134,6 @@ a[data-toggle="collapse"] {
 }
 
 
-
-
-
 #dismiss {
     width: 35px;
     height: 35px;
@@ -148,7 +146,7 @@ a[data-toggle="collapse"] {
 </style>
 
 
-
+<!-- 
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -182,7 +180,7 @@ a[data-toggle="collapse"] {
 
 
 
-</script>
+</script> -->
 
 
 <body>
@@ -263,7 +261,7 @@ a[data-toggle="collapse"] {
         </nav>
     </div>
 
-    <div id="content">
+    <!-- <div id="content">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
 
@@ -274,7 +272,7 @@ a[data-toggle="collapse"] {
 
             </div>
         </nav>
-    </div>
+    </div> -->
 
 
 </body>

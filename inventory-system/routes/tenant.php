@@ -53,6 +53,8 @@ Route::middleware([
     Route::post('/report/create', [ReportController::class, 'store']);
     Route::get('/report/delete/{id}', [ReportController::class, 'destroy']);
 
+    Route::get('/invreport/list', [ReportController::class, 'list']);
+    Route::get('/invreport/export', [ReportController::class, 'export']);
 
     Route::get('/', function () {
         return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');

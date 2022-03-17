@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\ReportProperties;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use App\Models\Inventory;
+
+use App\Exports\ReportExport;
+use Maatwebsite\Excel\Facades\Excel;
+
+use DB;
 
 class ReportController extends Controller
 {
@@ -114,5 +120,51 @@ class ReportController extends Controller
         $report->delete();
 
         return redirect('/report/list');
+    }
+
+    public function list(Request $request){
+        $dateStart = $request->input('dateStart',null);
+        $dateEnd = $request->input('dateEnd',null);
+        if($dateStart && $dateEnd){
+            $records = DB::table('inventory')
+                        ->join('product', 'inventory.product_id', 'product.id')
+                        ->select('product.name as product_name', 'product.price as unit_price', DB::raw('sum(case when inventory.type = "stock_in" then inventory.quantity else 0 end) as stock_in'), DB::raw('sum(case when inventory.type = "stock_out" then inventory.quantity else 0 end) as stock_out'), DB::raw('sum(inventory.quantity) as stock_count'), DB::raw('(case when sum(inventory.quantity) < 50 then "low stock" else "sufficient stock" end) as stock_status'))
+                        ->where('inventory.created_at','>=',$dateStart)
+                        ->where('inventory.created_at','<=',$dateEnd)
+                        ->groupBy('product.name','product.price')
+                        ->get();
+        }
+        elseif($dateStart && !$dateEnd){
+            $records = DB::table('inventory')
+                        ->join('product', 'inventory.product_id', 'product.id')
+                        ->select('product.name as product_name', 'product.price as unit_price', DB::raw('sum(case when inventory.type = "stock_in" then inventory.quantity else 0 end) as stock_in'), DB::raw('sum(case when inventory.type = "stock_out" then inventory.quantity else 0 end) as stock_out'), DB::raw('sum(inventory.quantity) as stock_count'), DB::raw('(case when sum(inventory.quantity) < 50 then "low stock" else "sufficient stock" end) as stock_status'))
+                        ->where('inventory.created_at','>=',$dateStart)
+                        ->groupBy('product.name','product.price')
+                        ->get();
+        }
+        elseif(!$dateStart && $dateEnd){
+            $records = DB::table('inventory')
+                        ->join('product', 'inventory.product_id', 'product.id')
+                        ->select('product.name as product_name', 'product.price as unit_price', DB::raw('sum(case when inventory.type = "stock_in" then inventory.quantity else 0 end) as stock_in'), DB::raw('sum(case when inventory.type = "stock_out" then inventory.quantity else 0 end) as stock_out'), DB::raw('sum(inventory.quantity) as stock_count'), DB::raw('(case when sum(inventory.quantity) < 50 then "low stock" else "sufficient stock" end) as stock_status'))
+                        ->where('inventory.created_at','<=',$dateEnd)
+                        ->groupBy('product.name','product.price')
+                        ->get();
+        }
+        else{
+            $records = DB::table('inventory')
+                        ->join('product', 'inventory.product_id', 'product.id')
+                        ->select('product.name as product_name', 'product.price as unit_price', DB::raw('sum(case when inventory.type = "stock_in" then inventory.quantity else 0 end) as stock_in'), DB::raw('sum(case when inventory.type = "stock_out" then inventory.quantity else 0 end) as stock_out'), DB::raw('sum(inventory.quantity) as stock_count'), DB::raw('(case when sum(inventory.quantity) < 50 then "low stock" else "sufficient stock" end) as stock_status'))
+                        ->groupBy('product.name','product.price')
+                        ->get();
+        }
+
+        return View::make('invreport.list')
+            ->with(['records'=>$records, 'dateStart'=>$dateStart, 'dateEnd'=>$dateEnd]);
+    }
+
+    public function export(Request $request){
+        $dateStart = $request->input('dateStart',null);
+        $dateEnd = $request->input('dateEnd',null);
+        return Excel::download(new ReportExport($dateStart,$dateEnd), 'report.xlsx');
     }
 }

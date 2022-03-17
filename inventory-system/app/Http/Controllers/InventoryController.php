@@ -105,7 +105,7 @@ class InventoryController extends Controller
         $inventory = Inventory::findOrFail($id);
         $inventory->delete();
 
-        return redirect('/games')->with('success', 'Game Data is successfully deleted');
+        return redirect('/inventory/list')->with('success', 'Inventory record is successfully deleted');
     }
 
     public function dashboard(){

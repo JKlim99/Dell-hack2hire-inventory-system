@@ -111,12 +111,12 @@ class FileValidation extends Controller
             }
 
             $inventoryStock = DB::table('inventory')
-                                ->select(DB::raw('SUM(quantity)'))
+                                ->select(DB::raw('SUM(quantity) as quantity'))
                                 ->where('product_id', $product->id)
                                 ->groupBy('product_id')
-                                ->get();
+                                ->first();
 
-            if($type == 'stock_out' && $inventoryStock < $quantity){
+            if($type == 'stock_out' && $inventoryStock->quantity < $quantity){
                 $inventory = InvalidInventoryUpdateModel::create([
                     'product_id' => $product->id,
                     'product_name' => $productName,

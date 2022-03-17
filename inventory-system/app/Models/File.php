@@ -2,18 +2,21 @@
 
 namespace App\Models;
 
-class User extends Authenticatable
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class File extends Model
 {
-    protected $table = 'user';
+    use HasFactory;
+    protected $table = 'file';
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'username',
-        'email',
-        'password',
+        'filename',
+        'mail_id'
     ];
 
     /**
@@ -33,4 +36,9 @@ class User extends Authenticatable
     protected $casts = [
         
     ];
+
+    public function mail()
+    {
+        return $this->belongsTo(MailList::class, 'mail_id');
+    }
 }

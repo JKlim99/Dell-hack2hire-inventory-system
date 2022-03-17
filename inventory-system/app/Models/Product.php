@@ -2,18 +2,22 @@
 
 namespace App\Models;
 
-class User extends Authenticatable
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Product extends Model
 {
-    protected $table = 'user';
+    use HasFactory;
+    protected $table = 'product';
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'username',
-        'email',
-        'password',
+        'name',
+        'description',
+        'price'
     ];
 
     /**
@@ -33,4 +37,9 @@ class User extends Authenticatable
     protected $casts = [
         
     ];
+
+    public function inventory()
+    {
+        return $this->hasMany(Inventory::class, 'product_id', 'id');
+    }
 }

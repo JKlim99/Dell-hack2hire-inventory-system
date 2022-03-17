@@ -26,3 +26,11 @@ Route::middleware([
 ])->group(function () {
     Route::get('/', [LoginController::class, 'login']);
 });
+
+Route::get('/nev', function () {
+    return view('Nev');
+});
+
+Route::get('/deshboard', function () {
+    return view('Deshboard');
+});

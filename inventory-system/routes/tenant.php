@@ -7,7 +7,9 @@ use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\MailListController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,12 +34,19 @@ Route::middleware([
     Route::post('/custom-login', [CustomAuthController::class, 'customLogin']);
     Route::post('/custom-registration', [CustomAuthController::class, 'customRegistration']);
 
-    Route::get('/product/list', [ProductController::class, 'list'], );
+    Route::get('/product/list', [ProductController::class, 'list'],);
     Route::get('/product/create', [ProductController::class, 'createForm']);
     Route::post('/product/create', [ProductController::class, 'create']);
     Route::get('/product/update/{id}', [ProductController::class, 'updateForm']);
     Route::post('/product/update/{id}', [ProductController::class, 'update']);
     Route::get('/product/delete/{id}', [ProductController::class, 'delete']);
+
+    Route::get('/mail/list', [MailListController::class, 'index'],);
+
+    Route::get('/report/list', [ReportController::class, 'index'],);
+    Route::post('/report/create', [ReportController::class, 'store']);
+    Route::get('/report/delete/{id}', [ReportController::class, 'destroy']);
+
 
     Route::get('/', function () {
         return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');

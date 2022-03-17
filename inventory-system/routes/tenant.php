@@ -5,7 +5,8 @@ declare(strict_types=1);
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\InventoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,12 @@ Route::middleware([
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
-    Route::get('/', [LoginController::class, 'login']);
+    Route::get('/', [CustomAuthController::class, 'login']);
+
+    Route::get('/inventory/index', [InventoryController::class, 'index']);
+    Route::get('/inventory/create', [InventoryController::class, 'create']);
+    Route::post('/inventory/edit', [InventoryController::class, 'edit']);
+    Route::post('/inventory/store', [InventoryController::class, 'store']);
 });
 
 Route::get('/nev', function () {

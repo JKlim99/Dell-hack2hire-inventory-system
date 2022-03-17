@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -48,9 +46,11 @@ a, a:hover, a:focus {
 
 #sidebar {
     position: fixed;
-    min-width: 250px;
-    max-width: 250px;
+    min-width: 15%;
+    max-width: 15%;
     height: 100ch;
+    top: 0;
+    left: 0;
     background: #7386D5;
     color: #fff;
     transition: all 0.3s;
@@ -111,7 +111,7 @@ a[data-toggle="collapse"] {
 
 @media (max-width: 768px) {
     #sidebar {
-        margin-left: -250px;
+        margin-left: 15%;
     }
     #sidebar.active {
         margin-left: 0;
@@ -122,36 +122,9 @@ a[data-toggle="collapse"] {
     display: block;
 }
 
-#sidebar {
-    min-width: 250px;
-    max-width: 250px;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    /* top layer */
-    z-index: 9999;
-}
 
-.overlay {
-    display: none;
-    position: fixed;
-    /* full screen */
-    width: 100vw;
-    height: 100vh;
-    /* transparent black */
-    background: rgba(0, 0, 0, 0.7);
-    /* middle layer, i.e. appears below the sidebar */
-    z-index: 998;
-    opacity: 0;
-    /* animate the transition */
-    transition: all 0.5s ease-in-out;
-}
-/* display .overlay when it has the .active class */
-.overlay.active {
-    display: block;
-    opacity: 1;
-}
+
+
 
 #dismiss {
     width: 35px;
@@ -198,27 +171,7 @@ a[data-toggle="collapse"] {
     });
 
 
-    $(document).ready(function () {
-        $("#sidebar").mCustomScrollbar({
-            theme: "minimal"
-        });
 
-        $('#dismiss, .overlay').on('click', function () {
-            // hide sidebar
-            $('#sidebar').removeClass('active');
-            // hide overlay
-            $('.overlay').removeClass('active');
-        });
-
-        $('#sidebarCollapse').on('click', function () {
-            // open sidebar
-            $('#sidebar').addClass('active');
-            // fade in the overlay
-            $('.overlay').addClass('active');
-            $('.collapse.in').toggleClass('in');
-            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
-        });
-    });
 </script>
 
 
@@ -236,9 +189,9 @@ a[data-toggle="collapse"] {
                     <a href="#">Dashboard</a>
                 </li>
             
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Product Manage</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Product Manage</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
                             <a href="#">Product Detail</a>
                         </li>
@@ -313,8 +266,6 @@ a[data-toggle="collapse"] {
         </nav>
     </div>
 
-    <div class="overlay"></div>
 
 </body>
 
-</html>

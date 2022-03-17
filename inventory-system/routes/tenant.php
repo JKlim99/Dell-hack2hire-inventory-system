@@ -25,12 +25,20 @@ Route::middleware([
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
-    Route::get('/', [CustomAuthController::class, 'login']);
+
+    Route::get('/login', [CustomAuthController::class, 'index']);
+    Route::get('/registration', [CustomAuthController::class, 'registration']);
+    Route::post('/custom-login', [CustomAuthController::class, 'customLogin']);
+    Route::post('/custom-registration', [CustomAuthController::class, 'customRegistration']);
 
     Route::get('/inventory/index', [InventoryController::class, 'index']);
     Route::get('/inventory/create', [InventoryController::class, 'create']);
     Route::post('/inventory/edit', [InventoryController::class, 'edit']);
     Route::post('/inventory/store', [InventoryController::class, 'store']);
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
 });
 
 Route::get('/nev', function () {

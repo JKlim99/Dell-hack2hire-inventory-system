@@ -32,3 +32,11 @@ Route::middleware([
     Route::post('/inventory/edit', [InventoryController::class, 'edit']);
     Route::post('/inventory/store', [InventoryController::class, 'store']);
 });
+
+Route::get('/nev', function () {
+    return view('Nev');
+});
+
+Route::get('/deshboard', function () {
+    return view('Deshboard');
+});

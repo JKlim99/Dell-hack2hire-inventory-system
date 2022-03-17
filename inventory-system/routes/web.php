@@ -17,3 +17,27 @@ Route::get('/', function () {
     
     return view('welcome');
 });
+
+Route::get('send-mail', function () {
+
+    $details = [
+        'title' => 'Mail from ItSolutionStuff.com',
+        'body' => 'This is for testing email using smtp'
+    ];
+
+    \Mail::to('americanting98@gmail.com')->send(new \App\Mail\SendMail($details));
+
+    dd("Email is Sent.");
+});
+
+Route::get('send-mail-fail', function () {
+
+    $details = [
+        'title' => 'Mail from ItSolutionStuff.com',
+        'body' => 'This is for testing email using smtp'
+    ];
+
+    \Mail::to('americanting98@gmail.com')->send(new \App\Mail\SendMailFail($details));
+
+    dd("Email is Sent.");
+});

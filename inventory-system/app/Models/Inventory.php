@@ -3,22 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class Inventory extends Model
 {
     use HasFactory;
-
-    protected $table = 'user';
+    protected $table = 'inventory';
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'username',
-        'email',
-        'password',
+        'product_id',
+        'product_name',
+        'unit_price',
+        'total_price',
+        'quantity',
+        'type'
     ];
 
     /**
@@ -34,4 +36,9 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [];
+
+    public function product()
+    {
+        return $this->belongsTo(MailList::class, 'product_id');
+    }
 }

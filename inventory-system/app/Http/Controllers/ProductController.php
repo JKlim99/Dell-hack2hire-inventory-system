@@ -13,12 +13,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function list()
     {
-        $product = Product::all();
+        $products = Product::all();
 
-        return View::make('sharks.index')
-            ->with('sharks', $product);
+        return View::make('product.list')->with(['products' => $products]);
     }
 
     /**
@@ -26,11 +25,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createForm()
     {
         //
         // load the create form (app/views/sharks/create.blade.php)
-        return View::make('sharks.create');
+        return View::make('product.create');
     }
 
     /**
@@ -39,16 +38,16 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required',
             'description' => 'required',
             'price' => 'required',
         ]);
-        $show = Product::create($validatedData);
+        $product = Product::create($validatedData);
 
-        return redirect('/games')->with('success', 'Game is successfully saved');
+        return redirect('/product/list')->with('success', $product->name.' successfully saved');
     }
 
     /**
@@ -57,30 +56,14 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function updateForm($id)
     {
         //
         $product = Product::find($id);
 
         // show the view and pass the shark to it
-        return View::make('sharks.show')
-            ->with('shark', $product);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-        $product = Product::find($id);
-
-        // show the edit form and pass the shark
-        return View::make('sharks.edit')
-            ->with('shark', $product);
+        return View::make('product.edit')
+            ->with(['product' => $product]);
     }
 
     /**
@@ -97,9 +80,10 @@ class ProductController extends Controller
             'description' => 'required',
             'price' => 'required',
         ]);
-        Product::whereId($id)->update($validatedData);
+        $product = Product::where('id',$id)->first();
+        $product->update($validatedData);
 
-        return redirect('/games')->with('success', 'Game Data is successfully updated');
+        return redirect('/product/update/'.$id)->with('success', $product->name.' is successfully updated');
     }
 
     /**
@@ -108,11 +92,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
         $product = Product::findOrFail($id);
         $product->delete();
 
-        return redirect('/games')->with('success', 'Game Data is successfully deleted');
+        return redirect('/product/list')->with('success', $product->name.' is successfully deleted');
     }
 }

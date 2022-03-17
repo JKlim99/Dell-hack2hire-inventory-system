@@ -50,7 +50,7 @@ class MailListener extends Command
     public function handle()
     {
         /** @var Client $client */
-        $client = Client::account("default");
+        $client = \Client::account("default");
         try {
             $client->connect();
         } catch (ConnectionFailedException $e) {

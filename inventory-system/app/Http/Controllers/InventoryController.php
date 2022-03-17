@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
+
+use App\Models\Product;
 use DB;
 
 class InventoryController extends Controller
@@ -16,11 +18,11 @@ class InventoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function list()
     {
-        $inventory = Inventory::all();
+        $inventory = Inventory::with('product')->get();
 
-        return view('inventory.index', compact('inventory'));
+        return view('stock.list', compact('inventory'));
     }
 
     /**
@@ -28,10 +30,10 @@ class InventoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createForm()
     {
-        //
-        return View::make('inventory.create');
+        $products = Product::all();
+        return View::make('stock.create')->with(['products'=>$products]);
     }
 
     /**
@@ -40,19 +42,19 @@ class InventoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $validatedData = $request->validate([
             'product_id' => 'required',
-            'product_name' => 'required',
             'unit_price' => 'required',
             'total_price' => 'required',
             'quantity' => 'required',
             'type' => 'required',
         ]);
+        
         $show = Inventory::create($validatedData);
 
-        return redirect('/inventory')->with('success', 'Game is successfully saved');
+        return redirect('/inventory/list')->with('success', 'Inventory record is successfully saved');
     }
 
     /**
@@ -61,30 +63,14 @@ class InventoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function updateForm($id)
     {
         //
         $inventory = Inventory::find($id);
 
         // show the view and pass the shark to it
-        return View::make('sharks.show')
-            ->with('shark', $inventory);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-        $inventory = Inventory::find($id);
-
-        // show the edit form and pass the shark
-        return View::make('sharks.edit')
-            ->with('shark', $inventory);
+        return View::make('stock.edit')
+            ->with(['inventory'=>$inventory]);
     }
 
     /**
@@ -97,7 +83,6 @@ class InventoryController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'product_id' => 'required',
             'product_name' => 'required',
             'unit_price' => 'required',
             'total_price' => 'required',
@@ -106,7 +91,7 @@ class InventoryController extends Controller
         ]);
         Inventory::whereId($id)->update($validatedData);
 
-        return redirect('/games')->with('success', 'Game Data is successfully updated');
+        return redirect('/inventory/update/'.$id)->with('success', 'Inventory is successfully updated');
     }
 
     /**
@@ -115,7 +100,7 @@ class InventoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
         $inventory = Inventory::findOrFail($id);
         $inventory->delete();

@@ -39,6 +39,13 @@ Route::middleware([
     Route::post('/product/update/{id}', [ProductController::class, 'update']);
     Route::get('/product/delete/{id}', [ProductController::class, 'delete']);
 
+    Route::get('/inventory/list', [InventoryController::class, 'list'], );
+    Route::get('/inventory/create', [InventoryController::class, 'createForm']);
+    Route::post('/inventory/create', [InventoryController::class, 'create']);
+    Route::get('/inventory/update/{id}', [InventoryController::class, 'updateForm']);
+    Route::post('/inventory/update/{id}', [InventoryController::class, 'update']);
+    Route::get('/inventory/delete/{id}', [InventoryController::class, 'delete']);
+
     Route::get('/', function () {
         return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
     });
@@ -52,24 +59,7 @@ Route::middleware([
         return view('inventoryreportcustomize');
     });
 
-    Route::get('/stock', function () {
-        return view('stock');
-    });
-
-    Route::get('/editstock', function () {
-        return view('editstock');
-    });
-
-    Route::get('/createstock', function () {
-        return view('createstock');
-    });
-
     Route::get('/', [CustomAuthController::class, 'login']);
-
-    Route::get('/inventory/index', [InventoryController::class, 'index']);
-    Route::get('/inventory/create', [InventoryController::class, 'create']);
-    Route::post('/inventory/edit', [InventoryController::class, 'edit']);
-    Route::post('/inventory/store', [InventoryController::class, 'store']);
 
     Route::get('/dashboard', [InventoryController::class, 'dashboard'], );
 });

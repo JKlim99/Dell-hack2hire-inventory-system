@@ -36,7 +36,6 @@
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
-
     @include('public')
 </head>
 
@@ -338,20 +337,32 @@
 
         <div class="card">
             <div class="card-header">
-                <h1 class="card-title">Product View</h1>
-                <a href="/product/create" class="btn btn-primary">Create</a>
+                <h1 class="card-title">Inventory Records</h1>
+                <a href="/inventory/create" class="btn btn-primary">Create</a>
             </div>
 
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table" id="list-table">
-                        <thead class="text-primary">
+                        <thead class=" text-primary">
                             <tr>
+                                <th>
+                                    Product Id
+                                </th>
                                 <th>
                                     Product Name
                                 </th>
                                 <th>
-                                    Price
+                                    Quantity
+                                </th>
+                                <th>
+                                    Unit Price
+                                </th>
+                                <th>
+                                    Total Price
+                                </th>
+                                <th>
+                                    Type
                                 </th>
                                 <th>
                                     Actions
@@ -359,22 +370,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($products as $product)
+                            @foreach($inventory as $item)
                             <tr>
                                 <td>
-                                    {{$product->name}}
+                                    {{$item->id}}
                                 </td>
                                 <td>
-                                    {{$product->price}}
+                                    {{$item->product_name}}
                                 </td>
                                 <td>
-                                    <a href="/product/update/{{$product->id}}" class="btn btn-primary">Edit</a>
-                                    <a href="/product/delete/{{$product->id}}" class="btn btn-danger">Delete</a>
+                                    {{$item->quantity}}
+                                </td>
+                                <td>
+                                    {{$item->unit_price}}
+                                </td>
+                                <td>
+                                    {{$item->total_price}}
+                                </td>
+                                <td>
+                                    {{ucfirst(str_replace('_',' ',$item->type))}}
+                                </td>
+                                <td>
+                                    <a href="/inventory/update/{{$item->id}}" class="btn btn-primary">Edit</a>
+                                    <a href="/inventory/delete/{{$item->id}}" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
                             @endforeach
-
-
                         </tbody>
 
                     </table>

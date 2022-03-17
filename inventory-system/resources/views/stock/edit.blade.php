@@ -36,7 +36,6 @@
     <!-- Scrollbar Custom CSS -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
-
     @include('public')
 </head>
 
@@ -327,6 +326,18 @@
         width: 33.3%;
 
     }
+
+    .col-15 {
+        float: left;
+        width: 15%;
+        margin-top: 6px;
+    }
+
+    .col-85 {
+        float: left;
+        width: 85%;
+        margin-top: 6px;
+    }
 </style>
 
 <body>
@@ -338,55 +349,32 @@
 
         <div class="card">
             <div class="card-header">
-                <h1 class="card-title">Product View</h1>
-                <a href="/product/create" class="btn btn-primary">Create</a>
+                <h1 class="card-title">Stock Edit</h1>
             </div>
 
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table" id="list-table">
-                        <thead class="text-primary">
-                            <tr>
-                                <th>
-                                    Product Name
-                                </th>
-                                <th>
-                                    Price
-                                </th>
-                                <th>
-                                    Actions
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($products as $product)
-                            <tr>
-                                <td>
-                                    {{$product->name}}
-                                </td>
-                                <td>
-                                    {{$product->price}}
-                                </td>
-                                <td>
-                                    <a href="/product/update/{{$product->id}}" class="btn btn-primary">Edit</a>
-                                    <a href="/product/delete/{{$product->id}}" class="btn btn-danger">Delete</a>
-                                </td>
-                            </tr>
-                            @endforeach
-
-
-                        </tbody>
-
-                    </table>
-                </div>
+                <form action="/inventory/update/{{$inventory->id}}" method="post">
+                    @csrf
+                    <label for="product-id">Product Id #{{$inventory->id}}</label><br />
+                    <label for="product-name">Product Name</label>
+                    <input type="text" id="product-name" name="product_name" class="form-control" value="{{$inventory->product_name}}">
+                    <label for="current-stock-quantity">Quantity</label>
+                    <input type="number" id="current-stock-quantity" name="quantity" class="form-control" value="{{$inventory->quantity}}">
+                    <label for="unit-price">Unit Price</label>
+                    <input type="number" id="unit-price" name="unit_price" class="form-control" value="{{$inventory->unit_price}}">
+                    <label for="total-price">Total Price</label>
+                    <input type="number" id="total-price" name="total_price" class="form-control" value="{{$inventory->total_price}}">
+                    <label for="type">Type</label>
+                    <select name="type" id="type" class="form-control">
+                        <option value="stock_in" @if($inventory->type == 'stock_in')selected @endif>Stock in</option>
+                        <option value="stock_out" @if($inventory->type == 'stock_out')selected @endif>Stock out</option>
+                    </select>
+                    <br>
+                    <a href="/inventory/list" class="btn btn-secondary">Back to list</a>
+                    <input type="submit" class="btn btn-primary" value="Update">
+                </form>
             </div>
         </div>
-    </div>
-    <script>
-        $(document).ready(function () {
-            $('#list-table').DataTable();
-        });
-    </script>
-</body>
 
-</html>
+    </div>
+</body>

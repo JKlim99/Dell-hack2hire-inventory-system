@@ -20,7 +20,8 @@ class Inventory extends Model
         'unit_price',
         'total_price',
         'quantity',
-        'type'
+        'type',
+        'file_id'
     ];
 
     /**
@@ -40,5 +41,10 @@ class Inventory extends Model
     public function product()
     {
         return $this->belongsTo(MailList::class, 'product_id');
+    }
+
+    public function file()
+    {
+        return $this->belongsTo(File::class, 'file_id');
     }
 }

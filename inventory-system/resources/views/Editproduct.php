@@ -288,7 +288,6 @@ a[data-toggle="collapse"] {
         /* position: fixed; f0f8ff */
         float : right;
         width : 83.5%;
-        background:red; 
         left : 0;
         padding : 1ch;
         border-radius : 0.5ch;
@@ -297,8 +296,33 @@ a[data-toggle="collapse"] {
 
     tr{
         width : 33.3%;
-
     }
+
+    .col-10 {
+    float: left;
+    width: 10%;
+    margin-top: 6px;
+    }
+
+    .col-90 {
+    float: left;
+    width: 90%;
+    margin-top: 6px;
+    }
+
+
+    input[type=submit] {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: left;
+    margin-left: 10px;
+    margin-top: 6px;
+    }
+
 </style>
 
 <body>
@@ -315,12 +339,24 @@ a[data-toggle="collapse"] {
 
       <div class="card-body">
         <form action="/action_page.php" method="post" target="_blank">
+            <div class = "col-10">
             <label for="product-name">Product Name</label>
+            </div>
+            <div class = "col-90">
             <input type="text" id="product-name" name="product-name" ><br>
+            </div>
+            <div class = "col-10">
             <label for="description">Description</label>
+            </div>
+            <div class = "col-90">
             <input type="text" id="description" name="description"><br>
+            </div>
+            <div class = "col-10">
             <label for="unit-price">Price</label>
+            </div>
+            <div class = "col-90">
             <input type="number" id="price" name="price" ><br>
+            </div>
             <input type="submit" value="Edit">
             <input type="submit" value="Delete">
             </form>

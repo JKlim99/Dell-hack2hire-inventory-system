@@ -288,7 +288,6 @@ a[data-toggle="collapse"] {
         /* position: fixed; f0f8ff */
         float : right;
         width : 83.5%;
-        background:red; 
         left : 0;
         padding : 1ch;
         border-radius : 0.5ch;
@@ -298,6 +297,31 @@ a[data-toggle="collapse"] {
     tr{
         width : 33.3%;
 
+    }
+
+    .col-15 {
+    float: left;
+    width: 15%;
+    margin-top: 6px;
+    }
+
+    .col-85 {
+    float: left;
+    width: 85%;
+    margin-top: 6px;
+    }
+
+
+    input[type=submit] {
+    background-color: #04AA6D;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: left;
+    margin-left: 10px;
+    margin-top: 6px;
     }
 
 </style>
@@ -316,22 +340,46 @@ a[data-toggle="collapse"] {
 
     <div class="card-body">
         <form action="/action_page.php" method="post"  target="_blank">
+            <div class = "col-15">
             <label for="product-id">Product Id</label>
+            </div>
+            <div class = "col-85">
             <input type="text" id="product-id" name="product-id"><br>
+            </div>
+            <div class = "col-15">
             <label for="product-name">Product Name</label>
+            </div>
+            <div class = "col-85">
             <input type="text" id="product-name" name="product-name"><br>
+            </div>
+            <div class = "col-15">
             <label for="current-stock-quantity">Current Stock Quantity</label>
+            </div>
+            <div class = "col-85">
             <input type="number" id="current-stock-quantity" name="current-stock-quantity"><br>
+            </div>
+            <div class = "col-15">
             <label for="unit-price">Unit Price</label>
+            </div>
+            <div class = "col-85">
             <input type="number" id="unit-price" name="unit-price"><br>
+            </div>
+            <div class = "col-15">
             <label for="total-price">Total Price</label>
+            </div>
+            <div class = "col-85">
             <input type="number" id="total-price" name="total-price"><br>
-            <label for="type">Type</label>    
+            </div>
+            <div class = "col-15">
+            <label for="type">Type</label>  
+            </div>
+            <div class = "col-85">  
             <select name="type" id="type">
                 <option value="stock-in">Stock in</option>
                 <option value="stock-out">Stock out</option>
               </select>
               <br>
+              </div>
             <input type="submit" value="Edit">
             <input type="submit" value="Delete">
           </form>

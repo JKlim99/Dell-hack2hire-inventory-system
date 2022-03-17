@@ -25,6 +25,12 @@ Route::middleware([
     InitializeTenancyByDomain::class,
     PreventAccessFromCentralDomains::class,
 ])->group(function () {
+
+    Route::get('/login', [CustomAuthController::class, 'index']);
+    Route::get('/registration', [CustomAuthController::class, 'registration']);
+    Route::post('/custom-login', [CustomAuthController::class, 'customLogin']);
+    Route::post('/custom-registration', [CustomAuthController::class, 'customRegistration']);
+
     Route::get('/', function () {
         return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
     });
@@ -64,6 +70,10 @@ Route::middleware([
     Route::get('/inventory/create', [InventoryController::class, 'create']);
     Route::post('/inventory/edit', [InventoryController::class, 'edit']);
     Route::post('/inventory/store', [InventoryController::class, 'store']);
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
 });
 
 Route::get('/nev', function () {
@@ -73,4 +83,3 @@ Route::get('/nev', function () {
 Route::get('/deshboard', function () {
     return view('Deshboard');
 });
-

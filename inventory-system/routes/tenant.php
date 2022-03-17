@@ -7,6 +7,7 @@ use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,13 @@ Route::middleware([
     Route::post('/custom-login', [CustomAuthController::class, 'customLogin']);
     Route::post('/custom-registration', [CustomAuthController::class, 'customRegistration']);
 
+    Route::get('/product/list', [ProductController::class, 'list'], );
+    Route::get('/product/create', [ProductController::class, 'createForm']);
+    Route::post('/product/create', [ProductController::class, 'create']);
+    Route::get('/product/update/{id}', [ProductController::class, 'updateForm']);
+    Route::post('/product/update/{id}', [ProductController::class, 'update']);
+    Route::get('/product/delete/{id}', [ProductController::class, 'delete']);
+
     Route::get('/', function () {
         return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
     });
@@ -54,18 +62,6 @@ Route::middleware([
 
     Route::get('/createstock', function () {
         return view('createstock');
-    });
-
-    Route::get('/product', function () {
-        return view('product');
-    });
-
-    Route::get('/editproduct', function () {
-        return view('editproduct');
-    });
-
-    Route::get('/createproduct', function () {
-        return view('createproduct');
     });
 
     Route::get('/', [CustomAuthController::class, 'login']);

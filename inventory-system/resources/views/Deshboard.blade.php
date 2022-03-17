@@ -48,13 +48,13 @@
             </div>
         </div>
         <div class="row" style="height : 30ch;">
-            <div class="col" style="">
+            <div class="col-md-4" style="">
                 <canvas id="canvasA" ></canvas>
             </div>
-            <div class="col" style="">
+            <div class="col-md-4" style="">
                 <canvas id="canvasB"></canvas>
             </div>
-            <div class="col" style="">
+            <div class="col-md-4" style="">
                 <canvas id="canvasC"></canvas>
             </div>
         </div>

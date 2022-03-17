@@ -71,9 +71,7 @@ Route::middleware([
     Route::post('/inventory/edit', [InventoryController::class, 'edit']);
     Route::post('/inventory/store', [InventoryController::class, 'store']);
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    });
+    Route::get('/dashboard', [InventoryController::class, 'dashboard'], );
 });
 
 Route::get('/nev', function () {

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Validator;
+use DB;
 
 class InventoryController extends Controller
 {
@@ -120,5 +121,35 @@ class InventoryController extends Controller
         $inventory->delete();
 
         return redirect('/games')->with('success', 'Game Data is successfully deleted');
+    }
+
+    public function dashboard(){
+        $top10StockIn = DB::table('inventory')
+                            ->join('product', 'inventory.product_id', 'product.id')
+                            ->select('product.name as name', DB::raw('sum(inventory.quantity) as stock'))
+                            ->where('inventory.type','stock_in')
+                            ->groupBy('product.name')
+                            ->orderBy('stock','desc')
+                            ->limit(10)
+                            ->get();
+
+        $top10StockOut = DB::table('inventory')
+                            ->join('product', 'inventory.product_id', 'product.id')
+                            ->select('product.name as name', DB::raw('sum(inventory.quantity) as stock'))
+                            ->where('inventory.type','stock_out')
+                            ->groupBy('product.name')
+                            ->orderBy('stock','asc')
+                            ->limit(10)
+                            ->get();
+        
+        $top10Stock = DB::table('inventory')
+                            ->join('product', 'inventory.product_id', 'product.id')
+                            ->select('product.name as name', DB::raw('sum(inventory.quantity) as stock'))
+                            ->groupBy('product.name')
+                            ->limit(10)
+                            ->get();
+        
+        return View::make('dashboard')
+            ->with(['top10StockIn'=>$top10StockIn, 'top10StockOut'=>$top10StockOut, 'top10Stock'=>$top10Stock]);        
     }
 }

@@ -34,41 +34,82 @@
     </div>
 
     <div class="SectionB">
-        <table>
-            <tr>
-                <div class="graphA">
-                    <canvas id="canvasA" height="300" width="200"></canvas>
-                </div>
-            </tr>
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Stock View</h4>
+      </div>
 
-            <tr>
-                <div class="graphB">
-                <canvas id="canvasB" height="300" width="200"></canvas>
-                </div>
-            </tr>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class=" text-primary">
+                <tr><th>
+                  Product Id
+                </th>
+                <th>
+                  Product Name
+                </th>
+                <th>
+                  Current Stock Quantity
+                </th>
+                <th>
+                  Unit Price
+                </th>
+                <th>
+                  Total Price
+                </th>
+                <th>
+                  Type
+                </th>
+              </tr></thead>
+              <tbody>
+                <tr>
+                  <td>
+                    
+                  </td>
+                  <td>
+  
+                  </td>
+                  <td>
+                    
+                  </td>
+                  <td>
+                    
+                  </td>
+                  <td>
+  
+                  </td>
+                  <td>
+                    
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    
+                  </td>
+                  <td>
+  
+                  </td>
+                  <td>
+                    
+                  </td>
+                  <td>
+                    
+                  </td>
+                  <td>
+  
+                  </td>
+                  <td>
+                    
+                  </td>
+                </tr></tbody>
 
-            <tr>
-                <div class="graphC">
-                <canvas id="canvasC" height="300" width="200"></canvas>
-                </div>
-            </tr>
-        </table>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="SectionC">
-        <table>
-            <tr>
-                <div class="StockInList">
-
-                </div>
-            </tr>
-            <tr>
-                <div class="StockOutList">
-
-                </div>
-            </tr>
-        </table>
-    </div>
     
 </body>
 </html>

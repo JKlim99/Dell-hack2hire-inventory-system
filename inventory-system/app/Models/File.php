@@ -41,4 +41,9 @@ class File extends Model
     {
         return $this->belongsTo(MailList::class, 'mail_id');
     }
+
+    public function inventory()
+    {
+        return $this->hasMany(Inventory::class, 'file_id', 'id');
+    }
 }

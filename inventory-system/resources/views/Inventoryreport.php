@@ -288,7 +288,7 @@ a[data-toggle="collapse"] {
         /* position: fixed; f0f8ff */
         float : right;
         width : 83.5%;
-        background:red; 
+        background:white; 
         left : 0;
         padding : 1ch;
         border-radius : 0.5ch;

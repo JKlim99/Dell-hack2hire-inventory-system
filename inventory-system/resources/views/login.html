@@ -1,62 +1,78 @@
-<nav class="navbar navbar-expand-lg navbar-transparent  bg-primary  navbar-absolute">
-    <div class="container-fluid">
-      <div class="navbar-wrapper">
-      <a class="navbar-brand" href="#pablo">Login page</a>
-      </div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-bar navbar-kebab"></span>
-        <span class="navbar-toggler-bar navbar-kebab"></span>
-        <span class="navbar-toggler-bar navbar-kebab"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navigation">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a href="https://now-ui-dashboard-laravel.creative-tim.com/login" class="nav-link">
-              <i class="now-ui-icons design_app"></i> Dashboard
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a href="https://now-ui-dashboard-laravel.creative-tim.com/register" class="nav-link">
-              <i class="now-ui-icons tech_mobile"></i> Register
-            </a>
-          </li>
-          <li class="nav-item  active  ">
-            <a href="https://now-ui-dashboard-laravel.creative-tim.com/login" class="nav-link">
-              <i class="now-ui-icons users_circle-08"></i> Login
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+<!DOCTYPE html>
+<html lang="en">
 
-  <div class="card-body" filter-color="black" data-image="https://now-ui-dashboard-laravel.creative-tim.com/assets/img/bg14.jpg">
-    <div class="content">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
 
+<style>
+
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+
+.input-group-email{
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  padding-bottom: 10px;
+}
+
+.input-group-password{
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  padding-bottom: 10px;
+}
+
+
+.submit{
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+.pull-right{
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+}
+
+</style>
+
+<body>
+<div class="content">
+      
 <div class="container">
 <div class="col-md-12 ml-auto mr-auto">
     <div class="header bg-gradient-primary py-10 py-lg-2 pt-lg-12">
         <div class="container">
             <div class="header-body text-center mb-7">
-                <div class="row justify-content-center">
-                    <div class="col-lg-12 col-md-9">
-                        <h3 class="text-white">Welcome to Uncalled Four.</h3>
+                        <h3 class="text-white">Welcome to Uncalled Four Login Page.</h3>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="col-md-4 ml-auto mr-auto">
-  <form role="form" method="POST" action="https://now-ui-dashboard-laravel.creative-tim.com/login">
-      <input type="hidden" name="_token" value="7WsRZBgzruoeBlVuVzyr2cQl0SQNb10Nx6luQNHd">          <div class="card card-login card-plain">
-      <div class="card-header ">
-        <div class="logo-container">
-          <img src="https://now-ui-dashboard-laravel.creative-tim.com/assets/img/now-logo.png" alt="">
-        </div>
-      </div>
+
       <div class="card-body ">
-        <div class="input-group no-border form-control-lg ">
+        <div class="input-group-email">
           <span class="input-group-prepend">
             <div class="input-group-text">
               <i class="now-ui-icons users_circle-08"></i>
@@ -64,7 +80,7 @@
           </span>
           <input class="form-control " placeholder="Email" type="email" name="email" value="" required="email" autofocus="">
         </div>
-                      <div class="input-group no-border form-control-lg ">
+              <div class="input-group-password ">
           <div class="input-group-prepend">
             <div class="input-group-text">
               <i class="now-ui-icons objects_key-25"></i>
@@ -72,13 +88,11 @@
           </div>
           <input placeholder="Password" class="form-control " name="password" type="password" value="" required="secret">
         </div>
-                    </div>
+      </div>
+
       <div class="card-footer ">
-        <button type="submit" class="btn btn-primary btn-round btn-lg btn-block mb-3">Get Started</button>
-        <div class="pull-left">
-          <h6>
-            <a href="https://now-ui-dashboard-laravel.creative-tim.com/register" class="link footer-link">Create Account</a>
-          </h6>
+        <div class = "submit">
+          <button type="submit" class="btn btn-primary btn-round btn-lg btn-block mb-3">Get Started</button>
         </div>
         <div class="pull-right">
           <h6>
@@ -91,3 +105,5 @@
 </div>
 </div>
 </div>
+
+</body>

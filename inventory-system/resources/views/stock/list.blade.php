@@ -36,6 +36,9 @@
                                     Type
                                 </th>
                                 <th>
+                                    Created On
+                                </th>
+                                <th>
                                     Actions
                                 </th>
                             </tr>
@@ -60,6 +63,9 @@
                                 </td>
                                 <td>
                                     {{ucfirst(str_replace('_',' ',$item->type))}}
+                                </td>
+                                <td>
+                                    {{$item->created_at}}
                                 </td>
                                 <td>
                                     <a href="/inventory/update/{{$item->id}}" class="btn btn-primary">Edit</a>

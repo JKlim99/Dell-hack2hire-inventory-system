@@ -92,7 +92,7 @@ class FileValidation extends Controller
             if(in_array(strtolower($type), ['stock_in','stockin','stock in','in'])){
                 $type = 'stock_in';
             }
-            elseif(in_array(strtolower($type), ['stock_out','stockout','stock out','in']) && $quantity > 0){ // if stock out, store quantity as negative value
+            elseif(in_array(strtolower($type), ['stock_out','stockout','stock out','out']) && $quantity > 0){ // if stock out, store quantity as negative value
                 $type = 'stock_out';
                 $quantity = $quantity * -1;
             }
@@ -116,7 +116,7 @@ class FileValidation extends Controller
                                 ->groupBy('product_id')
                                 ->first();
 
-            if($type == 'stock_out' && $inventoryStock->quantity < $quantity){
+            if($type == 'stock_out' && $inventoryStock->quantity < ($quantity * -1)){
                 $inventory = InvalidInventoryUpdateModel::create([
                     'product_id' => $product->id,
                     'product_name' => $productName,

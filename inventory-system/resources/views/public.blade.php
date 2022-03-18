@@ -1,5 +1,3 @@
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 <!-- Bootstrap JS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <script type="text/javascript">
@@ -209,7 +207,9 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 
-    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
 </head>
 
 <body>
@@ -231,9 +231,6 @@
                         Manage</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
-                            <a href="/product/create">Create Product</a>
-                        </li>
-                        <li>
                             <a href="/product/list">Manage Products</a>
                         </li>
                     </ul>
@@ -253,9 +250,6 @@
                     <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false"
                         class="dropdown-toggle">Inventory Management</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu3">
-                        <li>
-                            <a href="/inventory/create">Create Inventory Record</a>
-                        </li>
                         <li>
                             <a href="/inventory/list">Inventory List</a>
                         </li>

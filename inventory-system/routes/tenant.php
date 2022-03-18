@@ -58,9 +58,6 @@ Route::middleware([
     Route::get('/invreport/list', [ReportController::class, 'list']);
     Route::get('/invreport/export', [ReportController::class, 'export']);
 
-    Route::get('/', function () {
-        return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
-    });
     Route::get('/nav', function () {
         return view('nav');
     });
@@ -71,7 +68,9 @@ Route::middleware([
         return view('inventoryreportcustomize');
     });
 
-    Route::get('/', [CustomAuthController::class, 'login']);
+    Route::get('/', function () {
+        return redirect('/login');
+    });
 
     Route::get('/dashboard', [InventoryController::class, 'dashboard'], );
 });

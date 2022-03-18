@@ -228,7 +228,7 @@
 
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Product
-                        Manage</a>
+                        Management</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
                             <a href="/product/list">Manage Products</a>

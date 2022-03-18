@@ -93,7 +93,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Item</th>
-                                <th scope="col">Stock In number</th>
+                                <th scope="col">Stock Out number</th>
                             </tr>
                         </thead> 
                         <tbody>
@@ -102,7 +102,7 @@
                             <tr>
                                 <th scope="row">{{$index}}</th>
                                 <td>{{$item->name}}</td>
-                                <td>{{$item->stock}}</td>
+                                <td>{{$item->stock*-1}}</td>
                             </tr>
                             <?php $index++;?>
                             @endforeach
@@ -139,7 +139,13 @@
     // ----------------------------------------------------------------------
     // bar chart data
     <?php $x_axisB = json_encode($top10StockOut->pluck('name')); ?>
-    <?php $y_axisB = json_encode($top10StockOut->pluck('stock')); ?>
+    <?php
+    $stocks = $top10StockOut->pluck('stock');
+    for($i=0; $i<count($stocks); $i++){
+        $stocks[$i] = $stocks[$i] * -1;
+    }
+    $y_axisB = json_encode($stocks); 
+    ?>
 
     let x_axisB = <?php echo $x_axisB; ?>;
     let y_axisB = <?php echo $y_axisB; ?>;

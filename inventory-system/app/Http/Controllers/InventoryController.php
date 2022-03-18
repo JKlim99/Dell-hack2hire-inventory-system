@@ -54,6 +54,12 @@ class InventoryController extends Controller
         $product_id = $request->input('product_id');
         $product = Product::find($product_id);
         $validatedData['product_name'] = $product->name;
+        if($request->input('type') == 'stock_out' && $request->input('quantity') > 0){
+            $validatedData['quantity'] = $request->input('quantity') * -1;
+        }
+        if($request->input('type') == 'stock_in' && $request->input('quantity') <= 0){
+            $validatedData['quantity'] = $request->input('quantity') * -1;
+        }
         $show = Inventory::create($validatedData);
 
         return redirect('/inventory/list')->with('success', 'Inventory record is successfully saved');
@@ -91,6 +97,12 @@ class InventoryController extends Controller
             'quantity' => 'required',
             'type' => 'required',
         ]);
+        if($request->input('type') == 'stock_out' && $request->input('quantity') > 0){
+            $validatedData['quantity'] = $request->input('quantity') * -1;
+        }
+        if($request->input('type') == 'stock_in' && $request->input('quantity') <= 0){
+            $validatedData['quantity'] = $request->input('quantity') * -1;
+        }
         Inventory::whereId($id)->update($validatedData);
 
         return redirect('/inventory/update/'.$id)->with('success', 'Inventory is successfully updated');

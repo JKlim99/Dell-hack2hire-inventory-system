@@ -109,6 +109,9 @@ class FileValidation extends Controller
                 ]);
                 return;
             }
+            if($type == 'stock_in' && $quantity < 0){
+                $quantity = $quantity * -1;
+            }
 
             $inventoryStock = DB::table('inventory')
                                 ->select(DB::raw('SUM(quantity) as quantity'))

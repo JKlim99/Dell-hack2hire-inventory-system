@@ -66,11 +66,13 @@
                 <input type="text" class="form-control" value="{{$mail->status}}" disabled>
                 <br/>
                 <label for="product-name">Attachments</label>
-                <li>
+                <ul>
                     @foreach($attachments as $attachment)
-                    <a href="{{'/mail/download/'.$attachment->file_name}}" target="_blank">{{$attachment->file_name}}</a>
+                    <li>
+                        <a href="{{'/mail/download/'.$attachment->file_name}}" target="_blank">{{$attachment->file_name}}</a>
+                    </li>
                     @endforeach
-                </li>
+                </ul>
                 <br/>
                 <a href="/mail/list" class="btn btn-secondary">Back to list</a>
             </div>

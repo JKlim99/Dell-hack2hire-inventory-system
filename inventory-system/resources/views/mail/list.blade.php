@@ -19,19 +19,19 @@
                                     Subject
                                 </th>
                                 <th>
-                                    Body
-                                </th>
-                                <th>
                                     Sender
                                 </th>
                                 <th>
                                     Status
                                 </th>
                                 <th>
-                                    Created At
+                                    Created On
                                 </th>
                                 <th>
                                     Last Updated
+                                </th>
+                                <th>
+                                    Actions
                                 </th>
                             </tr>
                         </thead>
@@ -40,9 +40,6 @@
                             <tr>
                                 <td>
                                     {{$mail->subject}}
-                                </td>
-                                <td>
-                                    {{$mail->body}}
                                 </td>
                                 <td>
                                     {{$mail->sender}}
@@ -55,6 +52,9 @@
                                 </td>
                                 <td>
                                     {{$mail->updated_at}}
+                                </td>
+                                <td>
+                                    <a href="/mail/list/{{$mail->id}}" class="btn btn-primary">View details</a>
                                 </td>
                             </tr>
                             @endforeach

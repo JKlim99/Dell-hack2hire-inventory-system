@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MailList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use Storage;
 
 class MailListController extends Controller
 {
@@ -59,10 +60,16 @@ class MailListController extends Controller
     {
         //
         $mailList = MailList::find($id);
+        $attachments = $mailList->files;
 
         // show the view and pass the shark to it
-        return View::make('sharks.show')
-            ->with('shark', $mailList);
+        return View::make('emails.mailDetail')
+            ->with(['mail'=>$mailList, 'attachments'=>$attachments]);
+    }
+
+    public function download($filename)
+    {
+        return response()->download(storage_path().'/'.$filename);
     }
     /**
      * Show the form for editing the specified resource.

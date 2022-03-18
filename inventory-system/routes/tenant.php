@@ -48,6 +48,8 @@ Route::middleware([
     Route::post('/inventory/update/{id}', [InventoryController::class, 'update']);
     Route::get('/inventory/delete/{id}', [InventoryController::class, 'delete']);
     Route::get('/mail/list', [MailListController::class, 'index'],);
+    Route::get('/mail/list/{id}', [MailListController::class, 'show'],);
+    Route::get('/mail/download/{filename}', [MailListController::class, 'download'],);
 
     Route::get('/report/list', [ReportController::class, 'index'],);
     Route::post('/report/create', [ReportController::class, 'store']);

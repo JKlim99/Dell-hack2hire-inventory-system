@@ -20,8 +20,6 @@
                         <option value="{{$product->id}}">{{$product->name}}</option>
                         @endforeach
                     </select>
-                    <label for="product-name">Product Name</label>
-                    <input type="text" id="product-name" name="product_name" class="form-control">
                     <label for="current-stock-quantity">Quantity</label>
                     <input type="number" id="current-stock-quantity" name="quantity" class="form-control">
                     <label for="unit-price">Unit Price</label>

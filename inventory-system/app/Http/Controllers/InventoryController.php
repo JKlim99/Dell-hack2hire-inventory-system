@@ -51,7 +51,9 @@ class InventoryController extends Controller
             'quantity' => 'required',
             'type' => 'required',
         ]);
-        
+        $product_id = $request->input('product_id');
+        $product = Product::find($product_id);
+        $validatedData['product_name'] = $product->name;
         $show = Inventory::create($validatedData);
 
         return redirect('/inventory/list')->with('success', 'Inventory record is successfully saved');
